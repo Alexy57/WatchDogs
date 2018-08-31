@@ -1,0 +1,93 @@
+#====================#
+#	 SKRIPT BY		 #
+#	ALEXY & WINKER	 #
+#====================#
+
+#GITHUB:
+# https://github.com/Alexy57/WatchDogs
+#Version:
+#0.1a
+
+
+options:
+
+
+	Radius: 50 #Défini le rayons d'extinction des lumières
+	BlackOut_Time: 60 #Temps d'extinction des lumières (en secondes)	
+	
+# on load:
+	# broadcast "&8[&2WATCHDOGS&8] &aVous disposez de la version 0.1a."
+	# if text from "https://pastebin.com/raw/pD0L7vQJ" is not "0.1a":
+		# broadcast "&8[&2WATCHDOGS&8] &aUne nouvelle version du script est disponible ! Installation en cour..."
+		# download from "https://pastebin.com/raw/Lcbm8KbV" to "plugins/Skript/scripts/WatchDogs.sk"
+		# broadcast "&a 10%"
+		# wait 3 ticks
+		# broadcast "&a 12%"
+		# wait 8 ticks
+		# broadcast "&a25%"
+		# broadcast "&a50%"
+		# wait 8 ticks
+		# broadcast "&a65%"
+		# wait 8 ticks
+		# broadcast "&a90%"
+		# wait 8 ticks
+		# broadcast "&a100%"
+		# broadcast "&aMise à jour terminée !"
+		# execute console command "/skript reload WatchDogs.sk"
+	
+command /watchdogs [<text>]:
+	trigger:
+		if arg 1 is "help":
+			send "&a==========&2WATCHDOGS&a=========="
+			send " "
+			send "&e>> &6/watchdogs blackout &5Permet d'éteindre toutes les lumières dans un rayon de {@Radius} blocks"
+			send " "
+			send "&a============================="
+		if player has permission "watchdogs.vip":
+			if arg 1 is "blackout":
+				send "&2&lTentative de hack des lumières."
+				wait 0.5 second
+				send "&2&lTentative de hack des lumières.."
+				wait 0.5 second
+				send "&2&lTentative de hack des lumières..."
+				wait 5 seconds
+				chance of 90%:
+					send "&c&k***&r&2HACKING COMPLETE&c&k*** &r"
+					loop blocks in radius {@Radius} around player:
+						if loop-block is daylight_detector_inverted:
+							set loop-block to daylight sensor
+							add loop-block to {_looped::*}
+					loop {@BlackOut_Time} times:
+						wait a second
+					loop {_looped::*}:
+						set {_previousloc} to location of loop-value
+						set block at {_previousloc} to daylight_detector_inverted
+					stop
+		else:
+			if arg 1 is "blackout":
+				send "&2&lTentative de hack des lumières."
+				wait 0.5 second
+				send "&2&lTentative de hack des lumières.."
+				wait 0.5 second
+				send "&2&lTentative de hack des lumières..."
+				wait 5 seconds
+				chance of 75%:
+					send "&c&k***&r&2HACKING COMPLETE&c&k*** &r"
+					loop blocks in radius {@Radius} around player:
+						if loop-block is daylight_detector_inverted:
+							set loop-block to daylight sensor
+							add loop-block to {_looped::*}
+					loop {@BlackOut_Time} times:
+						wait a second
+					loop {_looped::*}:
+						set {_previousloc} to location of loop-value
+						set block at {_previousloc} to daylight_detector_inverted
+					stop
+command /wd [<text>]:
+	trigger:
+		if player has permission "watchdogs.mod":
+			if arg 1 is "ver" or "version":
+				send "&8[&2WATCHDOGS&8] &aVous disposez de la version 0.1a"
+				
+				
+				
