@@ -12,6 +12,8 @@ Ajout d'autre hacks
 Commandes:
  
 /watchdogs blackout >> Eteindre les lumière pendant un certains temps
+
+
 /watchdogs hack door >> Ouvrir en hackant une porte en fer 
 
 
